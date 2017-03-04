@@ -1,6 +1,7 @@
 import os
 import random
 import time
+import datetime
 import usertracker
 import irc
 import ban
@@ -466,9 +467,10 @@ while True:
 					antiflood_timer = time.time()
 
 				if message.suffix.startswith("!feedback"):
+					time = str(datetime.now())
 					with open("feedback", "a") as feedback:
 						feedback.write("\n")
-						feedback.write(message.sender + ": " + message.get_parameter("!feedback"))
+						feedback.write("<" + time + "> " + message.sender + ": " + message.get_parameter("!feedback"))
 						feedback.write("\n")
 
 			if "MOTD" in message.suffix:
